@@ -6,6 +6,10 @@ import ResultView from './view/result/ResultView';
 
 export default class App extends React.Component {
 
+  componentDidMount() {
+    document.title = "The Church - Karaoke Bar"
+  }
+
   render() {
     return (
       <div className="app">
