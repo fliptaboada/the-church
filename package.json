@@ -22,14 +22,17 @@
     "typescript": "^3.2.1"
   },
   "devDependencies": {
-    "event-stream": "4.0.1"
+    "event-stream": "4.0.1",
+    "gh-pages": "^2.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cleanup": "node tools/cleanup.js"
+    "cleanup": "node tools/cleanup.js",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
