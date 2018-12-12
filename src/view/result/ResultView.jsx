@@ -56,13 +56,16 @@ export default class ResultView extends React.Component {
 
     loadResults = () => {
         const searchString = decodeURI(this.props.location.search.substring(1)).toUpperCase()
+
         this.setState({
             result: db.get('songs')
-                .filter(item => item.artist.toUpperCase().includes(searchString) || item.song.toUpperCase().includes(searchString))
+                .filter(item => this.normalize(item.artist).includes(this.normalize(searchString)) || this.normalize(item.song).includes(this.normalize(searchString)))
                 .value(),
             searching: false
         })
     }
+
+    normalize = (text) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toUpperCase()
 
     voltar = () => {
         this.props.history.push('/')
