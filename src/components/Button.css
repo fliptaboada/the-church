@@ -1,0 +1,11 @@
+.button {
+    border: none;
+    border-radius: 4px;
+    background-color: #272121;
+    color: #ee283b;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    padding: 0.5rem;
+}

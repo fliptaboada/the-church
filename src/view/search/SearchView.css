@@ -1,0 +1,25 @@
+.search-view {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-logo {
+    margin-bottom: 3rem;
+    margin-top: 1rem;
+}
+
+.lbl-busca {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+}
+
+.lbl-info {
+    font-family: 'Overpass Mono', monospace;
+    font-size: 0.6rem;
+}
+
+.btn-lista {
+    margin-top: 0.5rem;
+}

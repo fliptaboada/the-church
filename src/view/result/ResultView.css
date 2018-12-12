@@ -1,0 +1,55 @@
+.result-view {
+    display: flex;
+    flex-direction: column;
+}
+
+.lbl-result-header {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    margin-bottom: -5px;
+}
+
+.lbl-result-search {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+}
+
+.result-table {
+    margin: 1rem 0 1rem 0;
+    text-align: left;
+}
+
+.result-table thead {
+    color: #ee283b;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+}
+
+.result-table tbody {
+    background-color: white;
+    color: black;
+    font-family: 'Overpass Mono', monospace;
+    font-size: 0.8rem;
+}
+.result-table td, .result-table th {
+    padding: 0.25rem 0.5rem
+}
+
+.result-table tr td:not(:last-child) {
+    border-right: 1px solid black
+}
+
+.result-table th, .result-table tr:not(:last-child) {
+    border-bottom: 1px solid black
+}
+
+.result-logo {
+    margin-bottom: 1rem;
+    margin-top: 8rem;
+}
