@@ -31,7 +31,7 @@ export default class ResultView extends React.Component {
         return (
             <div className='result-view'>
                 <span className="lbl-result-header">RESULTADO PARA:</span>
-                <span className="lbl-result-search">{this.props.location.search.substring(1).toUpperCase()}</span>
+                <span className="lbl-result-search">{decodeURI(this.props.location.search.substring(1)).toUpperCase()}</span>
                 <table className='result-table'>
                     <thead>
                         <tr>
@@ -55,10 +55,10 @@ export default class ResultView extends React.Component {
     }
 
     loadResults = () => {
-        const searchString = this.props.location.search.substring(1).toUpperCase()
+        const searchString = decodeURI(this.props.location.search.substring(1)).toUpperCase()
         this.setState({
             result: db.get('songs')
-                .filter(item => item.artist.toUpperCase().includes(searchString))
+                .filter(item => item.artist.toUpperCase().includes(searchString) || item.song.toUpperCase().includes(searchString))
                 .value(),
             searching: false
         })

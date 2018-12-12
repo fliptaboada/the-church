@@ -1,7 +1,7 @@
 {
   "name": "the-church",
   "version": "0.1.0",
-  "homepage": "http://fliptaboada.github.io/the-church",
+  "homepage": "https://fliptaboada.github.io/the-church",
   "private": true,
   "dependencies": {
     "@types/jest": "^23.3.10",

@@ -28,7 +28,7 @@ export default class SearchView extends React.Component<SearchProps> {
     private onSearch = (searchQuery: string) => {
         this.props.history.push({
             pathname: '/result',
-            search: searchQuery
+            search: encodeURI(searchQuery.trim())
         })
     }
 
