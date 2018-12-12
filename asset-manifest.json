@@ -1,7 +1,7 @@
 {
   "main.css": "/the-church/static/css/main.f10e3006.chunk.css",
-  "main.js": "/the-church/static/js/main.1ca6d55c.chunk.js",
-  "main.js.map": "/the-church/static/js/main.1ca6d55c.chunk.js.map",
+  "main.js": "/the-church/static/js/main.1b679f4b.chunk.js",
+  "main.js.map": "/the-church/static/js/main.1b679f4b.chunk.js.map",
   "static/js/1.193e2ca8.chunk.js": "/the-church/static/js/1.193e2ca8.chunk.js",
   "static/js/1.193e2ca8.chunk.js.map": "/the-church/static/js/1.193e2ca8.chunk.js.map",
   "runtime~main.js": "/the-church/static/js/runtime~main.ee4f3aa1.js",
@@ -9,6 +9,6 @@
   "static/media/logo-thechurch.5936e11c.svg": "/the-church/static/media/logo-thechurch.5936e11c.svg",
   "static/css/main.f10e3006.chunk.css.map": "/the-church/static/css/main.f10e3006.chunk.css.map",
   "index.html": "/the-church/index.html",
-  "precache-manifest.bb524f7224954be598a34728a1750b68.js": "/the-church/precache-manifest.bb524f7224954be598a34728a1750b68.js",
+  "precache-manifest.441d36729e54968326799f2f7cfb498a.js": "/the-church/precache-manifest.441d36729e54968326799f2f7cfb498a.js",
   "service-worker.js": "/the-church/service-worker.js"
 }
