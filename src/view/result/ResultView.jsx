@@ -75,7 +75,7 @@ export default class ResultView extends React.Component {
                                                 minWidth={65}
                                             />
                                             <Column
-                                                label='Música / Artista'
+                                                label={this.createSontArtistHeader()}
                                                 dataKey='song'
                                                 flexGrow={1}
                                                 width={1.0}
@@ -115,7 +115,15 @@ export default class ResultView extends React.Component {
         return Math.ceil(data.length * this.getPixelsPerChar() / (width - 75 - 20)) * 20
     }
 
-    createSongArtistCell = ({ rowData }) => rowData.song.toUpperCase() + " - " + rowData.artist.toUpperCase()
+    createSontArtistHeader = () => this.props.location.search ? 'Música / Artista' : 'Artista / Música'
+
+    createSongArtistCell = ({ rowData }) => {
+        if (this.props.location.search) {
+            return rowData.song.toUpperCase() + " - " + rowData.artist.toUpperCase()
+        } else {
+            return rowData.artist.toUpperCase() + " - " + rowData.song.toUpperCase()
+        }
+    }
 
     loadResults = () => {
         if (this.props.location.search) {
