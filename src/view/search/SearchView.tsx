@@ -19,7 +19,7 @@ export default class SearchView extends React.Component<SearchProps> {
                 <SearchInput onSearch={this.onSearch} />
                 <p className='lbl-info'>Encontre o código da sua música utilizando a <br />
                     pesquisa acima ou se preferir:</p>
-                <Button className='btn-lista'>VER A LISTA COMPLETA</Button>
+                <Button className='btn-lista' onClick={this.onFullList}>VER A LISTA COMPLETA</Button>
             </div>
         )
     }
@@ -30,6 +30,10 @@ export default class SearchView extends React.Component<SearchProps> {
             pathname: '/result',
             search: encodeURI(searchQuery.trim())
         })
+    }
+
+    private onFullList = () => {
+        this.props.history.push('/result')
     }
 
 }

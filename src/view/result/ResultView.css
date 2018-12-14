@@ -23,7 +23,7 @@
     text-align: left;
 }
 
-.result-table thead {
+.result-table thead, .result-table .ReactVirtualized__Table__headerRow {
     color: #ee283b;
     font-family: 'Kanit', sans-serif;
     font-weight: 800;
@@ -31,7 +31,7 @@
     letter-spacing: 1.5px;
 }
 
-.result-table tbody {
+.result-table tbody, .result-table .ReactVirtualized__Table__Grid {
     background-color: white;
     color: black;
     font-family: 'Overpass Mono', monospace;
@@ -41,11 +41,11 @@
     padding: 0.25rem 0.5rem
 }
 
-.result-table tr td:not(:last-child) {
+.result-table tr td:not(:last-child), .result-table .ReactVirtualized__Table__rowColumn:not(:last-child) {
     border-right: 1px solid black
 }
 
-.result-table th, .result-table tr:not(:last-child) {
+.result-table th, .result-table tr:not(:last-child), .result-table .ReactVirtualized__Table__row:not(:last-child) {
     border-bottom: 1px solid black
 }
 

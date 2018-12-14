@@ -3,6 +3,8 @@ import './ResultView.css'
 import Button from '../../components/Button'
 import db from '../../database/database';
 import Logo from '../../components/Logo';
+import { AutoSizer, WindowScroller, Table, Column } from 'react-virtualized'
+import 'react-virtualized/styles.css';
 
 export default class ResultView extends React.Component {
 
@@ -30,9 +32,53 @@ export default class ResultView extends React.Component {
     render() {
         return (
             <div className='result-view'>
-                <span className="lbl-result-header">RESULTADO PARA:</span>
-                <span className="lbl-result-search">{decodeURI(this.props.location.search.substring(1)).toUpperCase()}</span>
-                <table className='result-table'>
+                {this.props.location.search ?
+                    <>
+                        <span className="lbl-result-header">RESULTADO PARA:</span>
+                        <span className="lbl-result-search">{decodeURI(this.props.location.search.substring(1)).toUpperCase()}</span>
+                    </>
+                    :
+                    <span className="lbl-result-header">LISTA COMPLETA</span>
+                }
+                <WindowScroller>
+                    {({ height, isScrolling, onChildScroll, scrollTop }) => (
+                        <div style={{ flex: '1 1 auto' }}>
+                            <AutoSizer disableHeight>
+                                {({ width }) => (
+                                    <Table
+                                        autoHeight
+                                        height={height}
+                                        isScrolling={isScrolling}
+                                        scrollTop={scrollTop}
+                                        onScroll={onChildScroll}
+                                        rowCount={this.state.result.length}
+                                        rowGetter={({ index }) => this.state.result[index]}
+                                        rowHeight={25}
+                                        headerHeight={20}
+                                        className='result-table'
+                                        width={width}
+                                    >
+                                        <Column
+                                            label='Código'
+                                            dataKey='id'
+                                            style={{ fontWeight: '600', fontSize: '1rem' }}
+                                            width={65}
+                                            minWidth={65}
+                                        />
+                                        <Column
+                                            label='Música / Artista'
+                                            dataKey='song'
+                                            flexGrow
+                                            width={1.0}
+                                            cellRenderer={({ rowData }) => (rowData.song + " - " + rowData.artist.toUpperCase())}
+                                        />
+                                    </Table>
+                                )}
+                            </AutoSizer>
+                        </div>
+                    )}
+                </WindowScroller>
+                {/*<table className='result-table'>
                     <thead>
                         <tr>
                             <th>CÓDIGO</th>
@@ -47,7 +93,7 @@ export default class ResultView extends React.Component {
                             </tr>
                         ))}
                     </tbody>
-                </table>
+                        </table>*/}
                 <Button onClick={this.voltar}>VOLTAR PARA A PESQUISA</Button>
                 <Logo className="result-logo" />
             </div>
@@ -55,14 +101,21 @@ export default class ResultView extends React.Component {
     }
 
     loadResults = () => {
-        const searchString = decodeURI(this.props.location.search.substring(1)).toUpperCase()
+        if (this.props.location.search) {
+            const searchString = decodeURI(this.props.location.search.substring(1)).toUpperCase()
 
-        this.setState({
-            result: db.get('songs')
-                .filter(item => this.normalize(item.artist).includes(this.normalize(searchString)) || this.normalize(item.song).includes(this.normalize(searchString)))
-                .value(),
-            searching: false
-        })
+            this.setState({
+                result: db.get('songs')
+                    .filter(item => this.normalize(item.artist).includes(this.normalize(searchString)) || this.normalize(item.song).includes(this.normalize(searchString)))
+                    .sortBy('artist', 'song')
+                    .value(),
+                searching: false
+            })
+        } else {
+            this.setState({
+                result: db.get('songs').sortBy('artist', 'song').value()
+            })
+        }
     }
 
     normalize = (text) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toUpperCase()
