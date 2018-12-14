@@ -8,12 +8,15 @@ import 'react-virtualized/styles.css';
 
 export default class ResultView extends React.Component {
 
+    width = 0
+
     constructor(props) {
         super(props)
         this.state = {
             result: [],
-            searching: true
+            searching: true,
         }
+        this.tableRef = React.createRef();
     }
 
     componentDidMount() {
@@ -44,36 +47,43 @@ export default class ResultView extends React.Component {
                     {({ height, isScrolling, onChildScroll, scrollTop }) => (
                         <div style={{ flex: '1 1 auto' }}>
                             <AutoSizer disableHeight>
-                                {({ width }) => (
-                                    <Table
-                                        autoHeight
-                                        height={height}
-                                        isScrolling={isScrolling}
-                                        scrollTop={scrollTop}
-                                        onScroll={onChildScroll}
-                                        rowCount={this.state.result.length}
-                                        rowGetter={({ index }) => this.state.result[index]}
-                                        rowHeight={25}
-                                        headerHeight={20}
-                                        className='result-table'
-                                        width={width}
-                                    >
-                                        <Column
-                                            label='Código'
-                                            dataKey='id'
-                                            style={{ fontWeight: '600', fontSize: '1rem' }}
-                                            width={65}
-                                            minWidth={65}
-                                        />
-                                        <Column
-                                            label='Música / Artista'
-                                            dataKey='song'
-                                            flexGrow
-                                            width={1.0}
-                                            cellRenderer={({ rowData }) => (rowData.song + " - " + rowData.artist.toUpperCase())}
-                                        />
-                                    </Table>
-                                )}
+                                {({ width }) => {
+                                    if (width !== this.width && this.tableRef) {
+                                        this.width = width
+                                        window.setTimeout(() => this.tableRef.current.recomputeRowHeights())
+                                    }
+                                    return (
+                                        <Table
+                                            ref={this.tableRef}
+                                            autoHeight
+                                            height={height}
+                                            isScrolling={isScrolling}
+                                            scrollTop={scrollTop}
+                                            onScroll={onChildScroll}
+                                            rowCount={this.state.result.length}
+                                            rowGetter={({ index }) => this.state.result[index]}
+                                            rowHeight={this.createGetRowHeight(width)}
+                                            headerHeight={20}
+                                            className='result-table'
+                                            width={width}
+                                        >
+                                            <Column
+                                                label='Código'
+                                                dataKey='id'
+                                                style={{ fontWeight: '600', fontSize: '1rem' }}
+                                                width={65}
+                                                minWidth={65}
+                                            />
+                                            <Column
+                                                label='Música / Artista'
+                                                dataKey='song'
+                                                flexGrow={1}
+                                                width={1.0}
+                                                cellRenderer={this.createSongArtistCell}
+                                            />
+                                        </Table>
+                                    )
+                                }}
                             </AutoSizer>
                         </div>
                     )}
@@ -100,6 +110,13 @@ export default class ResultView extends React.Component {
         )
     }
 
+    createGetRowHeight = (width) => ({ index }) => {
+        const data = this.createSongArtistCell({ rowData: this.state.result[index] })
+        return Math.ceil(data.length * this.getPixelsPerChar() / (width - 75 - 20)) * 20
+    }
+
+    createSongArtistCell = ({ rowData }) => rowData.song.toUpperCase() + " - " + rowData.artist.toUpperCase()
+
     loadResults = () => {
         if (this.props.location.search) {
             const searchString = decodeURI(this.props.location.search.substring(1)).toUpperCase()
@@ -116,6 +133,12 @@ export default class ResultView extends React.Component {
                 result: db.get('songs').sortBy('artist', 'song').value()
             })
         }
+    }
+
+    getPixelsPerChar = () => this.isMobile() ? 8.8 : 8
+
+    isMobile = () => {
+        return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
     }
 
     normalize = (text) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toUpperCase()

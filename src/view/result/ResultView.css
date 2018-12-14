@@ -31,6 +31,10 @@
     letter-spacing: 1.5px;
 }
 
+.result-table .ReactVirtualized__Table__headerColumn:not(:first-child) {
+    padding-left: 10px;
+}
+
 .result-table tbody, .result-table .ReactVirtualized__Table__Grid {
     background-color: white;
     color: black;
@@ -41,7 +45,25 @@
     padding: 0.25rem 0.5rem
 }
 
-.result-table tr td:not(:last-child), .result-table .ReactVirtualized__Table__rowColumn:not(:last-child) {
+.result-table .ReactVirtualized__Table__rowColumn {
+    white-space: normal;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.result-table .ReactVirtualized__Table__rowColumn:first-child {
+    margin-right: 0px;
+}
+
+
+.result-table .ReactVirtualized__Table__rowColumn:not(:first-child) {
+    border-left: 1px solid black;
+    padding-left: 10px;
+}
+
+
+.result-table tr td:not(:last-child) {
     border-right: 1px solid black
 }
 
