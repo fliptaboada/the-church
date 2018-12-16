@@ -1,5 +1,6 @@
 import React from 'react'
 import './SearchInput.css'
+import { ReactComponent as Arrow } from '../images/arrow-right.svg'
 
 export default class SearchInput extends React.Component {
 
@@ -14,7 +15,9 @@ export default class SearchInput extends React.Component {
         return (
             <span className='search-group'>
                 <input value={this.state.searchQuery} onChange={this.onChangeSearchQuery} />
-                <button onClick={this.onSearch}> >> </button>
+                <button onClick={this.onSearch}>
+                    <Arrow fill='white' />
+                </button>
             </span>
         )
     }
