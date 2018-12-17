@@ -23,6 +23,10 @@
     text-align: left;
 }
 
+.result-table .no-rows {
+    padding: 0.25rem 0.5rem
+}
+
 .result-table thead, .result-table .ReactVirtualized__Table__headerRow {
     color: #ee283b;
     font-family: 'Kanit', sans-serif;

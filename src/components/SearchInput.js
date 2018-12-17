@@ -13,12 +13,14 @@ export default class SearchInput extends React.Component {
 
     render() {
         return (
-            <span className='search-group'>
-                <input value={this.state.searchQuery} onChange={this.onChangeSearchQuery} />
-                <button onClick={this.onSearch}>
-                    <Arrow fill='white' />
-                </button>
-            </span>
+            <form onSubmit={this.onSearch} action='.'>
+                <span className='search-group'>
+                    <input type='search' value={this.state.searchQuery} onChange={this.onChangeSearchQuery} />
+                    <button onClick={this.onSearch}>
+                        <Arrow fill='white' />
+                    </button>
+                </span>
+            </form>
         )
     }
 

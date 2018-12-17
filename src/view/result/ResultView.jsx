@@ -63,6 +63,7 @@ export default class ResultView extends React.Component {
                                             rowCount={this.state.result.length}
                                             rowGetter={({ index }) => this.state.result[index]}
                                             rowHeight={this.createGetRowHeight(width)}
+                                            noRowsRenderer={() => <span className='no-rows'>Nenhuma música encontrada</span>}
                                             headerHeight={20}
                                             className='result-table'
                                             width={width}

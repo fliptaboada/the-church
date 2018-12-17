@@ -5,7 +5,7 @@ import classnames from 'classnames'
 
 const Logo = (props) => {
     return (
-        <LogoSvg width={96} height={124} className={classnames('logo', props.className)} />
+        <LogoSvg fill='white' width={96} height={124} className={classnames('logo', props.className)} />
     )
 }
 
