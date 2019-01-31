@@ -8,9 +8,9 @@ function cleanup(inPath, outPath) {
         .pipe(es.split())
         .pipe(es.mapSync((line) => {
             if (
-                line === ',HD-OKÊ!!,' ||
-                line === 'CANTOR,NÚMERO,MÚSICA' ||
-                line.match(/,,Página [0-9].* de [0-9].*/g)) {
+                line.includes('HD-OKÊ') ||
+                line.includes('CANTOR,NÚMERO,MÚSICA') ||
+                line.match(/Página [0-9].* de [0-9].*/g)) {
                 return ''
             } else {
                 return line + '\n'
@@ -44,10 +44,21 @@ const cleanedCatalog = path.join(__dirname, '../src/catalogs/catalogo-cleaned.cs
 
 fs.unlinkSync(cleanedCatalog)
 
-cleanup(path.join(__dirname, '../catalogs/catalogonacional.csv'), cleanedCatalog)
-    .on('finish', () => {
-        cleanup(path.join(__dirname, '../catalogs/catalogointernacional.csv'), cleanedCatalog)
-            .on('finish', () => {
+const csvCatalogsDir = path.join(__dirname, '../catalogs/')
+
+fs.readdir(csvCatalogsDir, (err, files) => {
+    if (err) {
+        return err
+    }
+
+    const filesCount = files.length
+    let finished = 0
+
+    files.forEach(file => {
+        const filePath = path.resolve(csvCatalogsDir, file)
+        cleanup(filePath, cleanedCatalog).on('finish', () => {
+            finished++
+            if (finished === filesCount) {
                 const jsonPath = path.join(__dirname, '../src/catalogs/catalogo.json');
                 fs.unlinkSync(jsonPath)
 
@@ -57,6 +68,24 @@ cleanup(path.join(__dirname, '../catalogs/catalogonacional.csv'), cleanedCatalog
                 generateJson(cleanedCatalog, writeStream)
                 writeStream.write(']}')
                 writeStream.close()
-            })
+            }
+        })
     })
+})
+
+// cleanup(path.join(__dirname, '../catalogs/catalogonacional.csv'), cleanedCatalog)
+//     .on('finish', () => {
+//         cleanup(path.join(__dirname, '../catalogs/catalogointernacional.csv'), cleanedCatalog)
+//             .on('finish', () => {
+//                 const jsonPath = path.join(__dirname, '../src/catalogs/catalogo.json');
+//                 fs.unlinkSync(jsonPath)
+
+//                 const writeStream = fs.createWriteStream(jsonPath, { encoding: 'utf-8' })
+//                 writeStream.write('{\n')
+//                 writeStream.write('"songs":[')
+//                 generateJson(cleanedCatalog, writeStream)
+//                 writeStream.write(']}')
+//                 writeStream.close()
+//             })
+//     })
 

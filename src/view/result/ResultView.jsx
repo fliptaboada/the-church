@@ -133,13 +133,15 @@ export default class ResultView extends React.Component {
             this.setState({
                 result: db.get('songs')
                     .filter(item => this.normalize(item.artist).includes(this.normalize(searchString)) || this.normalize(item.song).includes(this.normalize(searchString)))
-                    .sortBy('artist', 'song')
+                    .orderBy([item => this.normalize(item.artist), item => this.normalize(item.song)], ['asc', 'asc'])
                     .value(),
                 searching: false
             })
         } else {
             this.setState({
-                result: db.get('songs').sortBy('artist', 'song').value()
+                result: db.get('songs')
+                    .orderBy([item => this.normalize(item.artist), item => this.normalize(item.song)], ['asc', 'asc'])
+                    .value()
             })
         }
     }
