@@ -1,0 +1,10 @@
+.floating-back-button {
+    bottom: -50px;
+    left: 25px;
+    position: fixed;
+    transition: all 0.2s ease-in;
+}
+
+.floating-back-button.show {
+    bottom: 10px;
+}

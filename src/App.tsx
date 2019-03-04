@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { Route, HashRouter as Router, Switch } from 'react-router-dom'
 import SearchView from './view/search/SearchView';
 import ResultView from './view/result/ResultView';
 import ScrollToTop from './components/ScrollToTop'
+import { ToastContainer } from 'react-toastify';
 
 export default class App extends React.Component {
 
@@ -18,6 +20,7 @@ export default class App extends React.Component {
             </Switch>
           </ScrollToTop>
         </Router>
+        <ToastContainer />
       </div>
     );
   }

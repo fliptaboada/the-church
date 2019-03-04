@@ -1,6 +1,7 @@
 import React from 'react'
 import './ResultView.css'
 import Button from '../../components/Button'
+import FloatingBackButton from '../../components/FloatingBackButton'
 import db from '../../database/database';
 import Logo from '../../components/Logo';
 import { AutoSizer, WindowScroller, Table, Column } from 'react-virtualized'
@@ -89,22 +90,7 @@ export default class ResultView extends React.Component {
                         </div>
                     )}
                 </WindowScroller>
-                {/*<table className='result-table'>
-                    <thead>
-                        <tr>
-                            <th>CÓDIGO</th>
-                            <th>MÚSICA / ARTISTA</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.result && this.state.result.map(row => (
-                            <tr key={row.id}>
-                                <td style={{ fontWeight: '600' }}>{row.id}</td>
-                                <td>{row.song} - {row.artist.toUpperCase()}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                        </table>*/}
+                <FloatingBackButton />
                 <Button onClick={this.voltar}>VOLTAR PARA A PESQUISA</Button>
                 <Logo className="result-logo" />
             </div>
