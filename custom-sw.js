@@ -10,11 +10,12 @@
  * and re-run your build process.
  * See https://goo.gl/2aRDsh
  */
+import React from 'react' // Typescript bug
 
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.5706f87eb1970511661b53660e4852e8.js"
+    "/precache-manifest.7fc02360be9371bf16118dd2537f9d45.js"
 );
 
 workbox.clientsClaim();
@@ -29,6 +30,11 @@ workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 workbox.routing.registerNavigationRoute("/index.html", {
-  
-  blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
+
+    blacklist: [/^\/_/, /\/[^\/]+\.[^\/]+$/],
 });
+
+self.addEventListener('message', () => {
+    if (messageEvent.data === 'skipWaiting') return self.skipWaiting();
+})
+
