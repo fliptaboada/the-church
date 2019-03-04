@@ -26,7 +26,7 @@ const Buttons = (props: ButtonsProps) => {
     )
 }
 
-export default (e: any) => toast('Este app pode ser adicionar à sua home', {
+export default (e: any) => toast('Deseja adicionar o app à sua tela inicial?', {
     position: 'top-center',
     className: 'default-toast',
     closeButton: <Buttons deferredPrompt={e} />,
