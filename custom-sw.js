@@ -10,8 +10,6 @@
  * and re-run your build process.
  * See https://goo.gl/2aRDsh
  */
-import React from 'react' // Typescript bug
-
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
