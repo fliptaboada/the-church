@@ -1,7 +1,7 @@
 {
   "name": "the-church",
   "version": "0.1.0",
-  "homepage": "https://thechurchbar.com.br",
+  "homepage": "https://musicas.thechurchbar.com.br",
   "private": true,
   "dependencies": {
     "@types/jest": "24.0.9",
